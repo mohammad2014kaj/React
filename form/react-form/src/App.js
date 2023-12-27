@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './SASS.scss';
 
 const MyForm = () => {
   const initialFormData = {
@@ -43,25 +44,25 @@ const MyForm = () => {
   };
 
   return (
-    <div>
-      {showAlert && <div className="success-alert">Submit successful!</div>}
+    <div className="container"> {/* استفاده از کلاس container */}
+      {showAlert && <div className="success-alert">Submit successful!</div>} {/* استفاده از کلاس success-alert */}
       <form onSubmit={handleSubmit}>
-        <label>
+        <label className="form-label"> {/* استفاده از کلاس form-label */}
           Name:
-          <input type="text" name="name" value={formData.name} onChange={handleChange} />
+          <input type="text" name="name" value={formData.name} onChange={handleChange} className="form-input" /> {/* استفاده از کلاس form-input */}
         </label>
 
-        <label>
+        <label className="form-label"> {/* استفاده از کلاس form-label */}
           Age:
-          <input type="number" name="age" value={formData.age} onChange={handleChange} />
+          <input type="number" name="age" value={formData.age} onChange={handleChange} className="form-input" /> {/* استفاده از کلاس form-input */}
         </label>
 
-        <label>
+        <label className="form-label"> {/* استفاده از کلاس form-label */}
           Email:
-          <input type="text" name="email" value={formData.email} onChange={handleChange} />
+          <input type="text" name="email" value={formData.email} onChange={handleChange} className="form-input" /> {/* استفاده از کلاس form-input */}
         </label>
 
-        <button type="submit" disabled={!isValid}>
+        <button type="submit" disabled={!isValid} className="submit-button btn"> {/* استفاده از کلاس submit-button */}
           Submit
         </button>
       </form>
