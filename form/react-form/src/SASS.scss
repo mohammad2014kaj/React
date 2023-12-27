@@ -1,0 +1,59 @@
+$main-font: 'Helvetica, sans-serif';
+$primary-color: #333;
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+%message-shared {
+  border: 1px solid $primary-color;
+  padding: 10px;
+  color: $primary-color;
+}
+
+@keyframes random-move {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(random(100) - 50 + px, random(100) - 50 + px); }
+}
+
+.container {
+  font-family: $main-font;
+  @include flex-center;
+  background-color: lighten($primary-color, 40%);
+  
+  .content {
+    @extend %message-shared;
+    @for $i from 1 through 3 {
+      > .item:nth-child(#{$i}) {
+        animation: random-move 5s ease-in-out infinite;
+      }
+    }
+  }
+}
+
+.success-alert {
+  @extend %message-shared;
+  background-color: lighten($primary-color, 50%);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5em;
+  color: $primary-color;
+}
+
+.form-input {
+  border: 1px solid darken($primary-color, 20%);
+  margin-bottom: 1em;
+  padding: 0.5em;
+  width: 100%;
+}
+
+.submit-button {
+  @extend %message-shared;
+  &:hover {
+    background-color: darken($primary-color, 20%);
+  }
+}
