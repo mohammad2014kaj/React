@@ -1,0 +1,16 @@
+body {
+    background-color: #301934;
+    font-family: Arial;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    color : #fdfdfe;
+}
+
+li{
+    color : rgb(222, 220, 220);
+    margin-bottom: 7px;
+}

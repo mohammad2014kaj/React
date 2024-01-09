@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import './style.css';
 const PostsComponent = () => {
   const [posts, setPosts] = useState([]);
 
@@ -16,7 +16,9 @@ const PostsComponent = () => {
 
   return (
     <div>
-      <h1>پست‌ها</h1>
+      <header >
+        <h1 >Posts</h1>
+      </header>
       <ul>
         {posts.map(post => (
           <li key={post.id}>
