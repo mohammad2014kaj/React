@@ -19,22 +19,21 @@ const MyForm = () => {
       const isAgeValid = !isNaN(formData.age) && formData.age !== '';
       const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email);
 
-      setIsValid(isNameValid && isAgeValid && isEmailValid);
+      const isValid = isNameValid && isAgeValid && isEmailValid;
+      setIsValid(isValid);
     };
 
     validateForm();
   }, [formData]);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       [e.target.name]: e.target.value,
-    });
+    }));
   };
 
   const handleSubmit = (e) => {
-    // Simulate a successful submission
-    // In a real application, you would handle the submission logic here
     e.preventDefault();
     setShowAlert(true);
     setTimeout(() => {
@@ -44,30 +43,18 @@ const MyForm = () => {
   };
 
   return (
-    <div className="container"> {/* استفاده از کلاس container */}
-      {showAlert && <div className="success-alert">Submit successful!</div>} {/* استفاده از کلاس success-alert */}
-      <form onSubmit={handleSubmit}>
-        <label className="form-label"> {/* استفاده از کلاس form-label */}
-          Name:
-          <input type="text" name="name" value={formData.name} onChange={handleChange} className="form-input" /> {/* استفاده از کلاس form-input */}
-        </label>
-
-        <label className="form-label"> {/* استفاده از کلاس form-label */}
-          Age:
-          <input type="number" name="age" value={formData.age} onChange={handleChange} className="form-input" /> {/* استفاده از کلاس form-input */}
-        </label>
-
-        <label className="form-label"> {/* استفاده از کلاس form-label */}
-          Email:
-          <input type="text" name="email" value={formData.email} onChange={handleChange} className="form-input" /> {/* استفاده از کلاس form-input */}
-        </label>
-
-        <button type="submit" disabled={!isValid} className="submit-button btn"> {/* استفاده از کلاس submit-button */}
-          Submit
-        </button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <p>Welcome</p>
+      <input type="text" placeholder="Name" name="name" value={formData.name} onChange={handleChange} /><br />
+      <input type="number" placeholder="Age" name="age" value={formData.age} onChange={handleChange} /><br />
+      <input type="email" placeholder="Email" name="email" value={formData.email} onChange={handleChange} /><br />
+      <input type="password" placeholder="Password" /><br />
+      <input type="submit" value="Sign in" /><br />
+      {showAlert && <div className="alert">Form submitted successfully!</div>}
+      {isValid ? null : <div className="error">Please fill in all the fields correctly.</div>}
+    </form>
   );
+  
 };
 
 export default MyForm;
