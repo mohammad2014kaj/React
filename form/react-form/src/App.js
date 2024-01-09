@@ -17,7 +17,7 @@ const MyForm = () => {
     const validateForm = () => {
       const isNameValid = formData.name.trim() !== '';
       const isAgeValid = !isNaN(formData.age) && formData.age !== '';
-      const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email);
+      const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) && formData.email.trim() !== '';
 
       const isValid = isNameValid && isAgeValid && isEmailValid;
       setIsValid(isValid);
@@ -35,11 +35,13 @@ const MyForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setShowAlert(true);
-    setTimeout(() => {
-      setShowAlert(false);
-      setFormData(initialFormData);
-    }, 3000);
+    if (isValid){
+      setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+        setFormData(initialFormData);
+      }, 3000);
+    }
   };
 
   return (
@@ -49,9 +51,8 @@ const MyForm = () => {
       <input type="number" placeholder="Age" name="age" value={formData.age} onChange={handleChange} /><br />
       <input type="email" placeholder="Email" name="email" value={formData.email} onChange={handleChange} /><br />
       <input type="password" placeholder="Password" /><br />
-      <input type="submit" value="Sign in" /><br />
-      {showAlert && <div className="alert">Form submitted successfully!</div>}
-      {isValid ? null : <div className="error">Please fill in all the fields correctly.</div>}
+      <input type="submit" value="Sign up" /><br />
+      {isValid ? <div className="alert">Form submitted successfully!</div> : <div className="error">Please fill in all the fields correctly.</div>}
     </form>
   );
   
